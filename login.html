@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="description" content="La página web en la que los usuarios comparten sus anécdotas y puntos de vista.">
+  <meta name="theme-color" content="#0d6efd">
+  <link rel="canonical" href="https://talkers.social">
+  
+  <title>Talkers</title>
+
+  <!-- MDB icon -->
+  <link rel="icon" href="img/Logo.svg" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+  <!-- MDB -->
+  <link rel="stylesheet" href="css/mdb.min.css" />
+
+  <style>
+    .mask-custom {
+      backdrop-filter: blur(2px);
+
+    }
+
+    @media screen and (max-width: 580px) {
+      #navbar {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+      #navbar-left {
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="container position-absolute top-50 start-50 translate-middle">
+    <div class="row">
+      <div class="col-md text-center">
+        <img src="./img/index/otp-security.png" class="w-75 mx-auto">
+      </div>
+      <div class="col-md">
+        <div class="position-relative p-5 shadow-2-soft rounded-2 mx-auto" style="max-width: 300px;">
+          <p class="fs-3 text-center fw-light">Iniciar sesión con <span class="text-primary fw-bold">Talkers</span></p>
+          <p class="text-center text-muted" style="font-size: .8em;">Para poder disfrutar de todas las características</p>
+          <div class="form-outline my-4">
+            <i class="fas fa-at trailing"></i>
+            <input type="text" id="form12" class="form-control" />
+            <label class="form-label " for="form12">Correo electrónico</label>
+          </div>
+          <div class="form-outline my-4">
+            <i class="fas fa-lock trailing"></i>
+            <input type="password" id="typePassword" class="form-control" />
+            <label class="form-label" for="typePassword">Contraseña</label>
+          </div>
+          <div class="text-center w-100 mb-4">
+            <a href="#">¿Has olvidado tu contraseña?</a>
+          </div>
+          <div class="text-center">
+            <button class="btn bg-primary bg-opacity-75 text-white">Iniciar sesión</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script type="text/javascript"></script>
+
+</body>
+</html>
