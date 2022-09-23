@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="description" content="La página web en la que los usuarios comparten sus anécdotas y puntos de vista.">
+  <meta name="theme-color" content="#0d6efd">
+  <link rel="canonical" href="https://talkers.social">
+  
+  <title>Talkers</title>
+
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+  <!-- MDB -->
+  <link rel="stylesheet" href="css/mdb.min.css" />
+
+  <style>
+    .mask-custom {
+      backdrop-filter: blur(2px);
+
+    }
+
+    @media screen and (max-width: 580px) {
+      #navbar {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+      #navbar-left {
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+
+</head>
+<body>
+
+    <div class="container position-absolute top-50 translate-middle start-50">
+      <div class="row py-5 shadow-2-soft rounded-2">
+        <div class="col-md text-center">
+            <input type="file" style="display: none;" id="profileInput">
+            <button 
+            onclick="document.getElementById('profileInput').click()"
+            class="btn w-50 rounded-circle bg-black mx-auto bg-opacity-50 bg-image" style="background-image: url('./img/welcome/woman-taking-selfie.svg');aspect-ratio: 1/1; appearance: none;"></button>
+        </div>
+        <div class="col-md text-center d-flex flex-column justify-content-center align-items-center">
+            <p class="text-primary fs-2 fw-bold">Foto de perfil</p>
+            <p class="w-75 text-muted my-4">Añade una foto de perfil. <br> Intenta que no sea muy pesada.</p>
+            <div class="progress w-75 rounded-3" style="height: 20px;">
+                <div class="progress-bar bg-success bg-opacity-75" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Subiendo imagen</div>
+              </div>
+            <button class="btn bg-primary text-white bg-opacity-75 disabled mt-5">Seguir <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <!--
+        <div class="col-md">
+            <div class="text-center">
+                <img src="./img/welcome/content-creator.svg" style="max-width: 300px;" alt="">
+            </div>
+        </div>
+        <div class="col-md">
+            <p class="text-primary fs-2 fw-bold text-center">Nombre de usuario</p>
+            <p class="w-75 text-muted my-4 text-center mx-auto">Elige tu nombre de usuario</p>
+            <div class="form-outline mx-auto" style="max-width: 300px;">
+                <p class="trailing">#3121</p>
+                <input type="text" id="form1" class="form-control form-icon-trailing" />
+                <label class="form-label" for="form1">Apodo</label>
+            </div>
+            <div class="text-center">
+                <button class="btn bg-primary text-white bg-opacity-75 disabled mt-5"><i class="fas fa-arrow-left"></i> Volver</button>
+                <button class="btn bg-primary text-white bg-opacity-75 disabled mt-5">Seguir <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        -->
+        <!--
+        <div class="col-md">
+            <div class="text-center">
+                <img src="./img/welcome/office-workplace.svg"  style="max-width: 300px;" alt="">
+            </div>
+        </div>
+        <div class="col-md">
+            <p class="text-primary fs-2 fw-bold text-center">Háblanos sobre tí</p>
+            <p class="w-75 text-muted my-4 text-center mx-auto">Escribe una descripción sobre tí</p>
+            <div class="form-outline">
+                <textarea class="form-control" id="textAreaExample" rows="4" data-mdb-showcounter="true" maxlength="155" ></textarea>
+                <label class="form-label" for="textAreaExample">Descripción de usuario</label>
+                <div class="form-helper"></div>
+              </div>
+            <div class="text-center">
+                <button class="btn bg-primary text-white bg-opacity-75 disabled mt-5"><i class="fas fa-arrow-left"></i> Volver</button>
+                <button class="btn bg-primary text-white bg-opacity-75 disabled mt-5">Seguir <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        -->
+    </div> 
+    </div>
+
+
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script type="text/javascript"></script>
+
+</body>
+</html>
