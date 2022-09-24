@@ -46,6 +46,14 @@
 </head>
 <body>
 
+  <div class="p-2 bg-danger position-absolute rounded-2 top-0 mt-5 start-50 translate-middle-x text-white text-center shadow-2-strong d-none"  id="errorContainer" style="min-width: 300px;">
+    <div class="position-relative">
+      <p class="my-2" id="errorContainerCode">ErrorCode</p>
+      <p class="my-2" id="errorContainerMessage">errorMessage</p>
+      <span class="position-absolute translate-middle top-0 start-100 pe-3" style="cursor: pointer;" id="errorContainerClose">&times;</span>
+    </div>
+  </div>
+
   <div class="container">
     <div class="row d-flex align-items-center" style="height: 100vh;">
         <div class="col-md">
@@ -55,25 +63,27 @@
             <div class="p-5 w-50 shadow-2-soft rounded-2 mx-auto" style="min-width: 300px;">
                 <p class="fs-3 text-center">Regístrate en <span class="fw-bold text-primary">Talkers</span></p>
                 <p class="text-center">Para poder disfrutar <br> de todas las características</p>
-                <div class="form-outline my-4">
-                    <i class="fas fa-at trailing"></i>
-                    <input type="text" id="form12" class="form-control" />
-                    <label class="form-label " for="form12">Correo electrónico</label>
-                </div>
-                <div class="form-outline my-4">
-                    <i class="fas fa-lock trailing"></i>
-                    <input type="password" id="form12" class="form-control" />
-                    <label class="form-label " for="form12">Contraseña</label>
-                </div>
-                <div class="form-outline my-4">
-                  <i class="fas fa-lock trailing"></i>
-                  <input type="password" id="form12" class="form-control" />
-                  <label class="form-label " for="form12">Repetir contraseña</label>
-              </div>
-                <div class="text-center">
-                    <a href="#" class="text-center">¿Ya tienes una cuenta?</a>
-                    <button class="btn bg-primary bg-opacity-75 mt-3 text-white">Registrarse</button>
-                </div>
+                <form class="needs-validation" novalidate>
+                  <div class="form-outline my-5">
+                    <input type="email" class="form-control" id="registerEmail" required />
+                    <label for="loginEmail" class="form-label">Correo electónico</label>
+                    <div class="invalid-feedback">Introdúce un correo válido</div>
+                  </div>
+                  <div class="form-outline my-5">
+                    <input type="password" class="form-control" id="registerPassword" required />
+                    <label for="loginPassword" class="form-label">Contraseña</label>
+                    <div class="invalid-feedback">Introdúce una contraseña</div>
+                  </div>
+                  <div class="form-outline my-5">
+                    <input type="password" class="form-control" id="registerPassword2" required />
+                    <label for="loginPassword" class="form-label">Contraseña</label>
+                  </div>
+                  <div class="text-center">
+                      <a href="#" class="text-center">¿No tienes una cuenta?</a> <br>
+                      <a href="#" class="text-center">¿Has olvidado tu contraseña?</a>
+                      <button class="btn bg-primary bg-opacity-75 mt-3 text-white" id="loginBtn" type="submit">Iniciar sesión</button>
+                  </div>
+                </form>
             </div>
         </div>
     </div>
@@ -83,4 +93,188 @@
   <script type="text/javascript"></script>
 
 </body>
+<script type="module">
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-analytics.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signInWithCustomToken, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+  import { getDatabase, ref, set, get, child, onValue, update, query, orderByChild, startAt } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCvu5ybKhzq0WGnZnDjq7XHLrIHO1FcNrQ",
+    authDomain: "revistaraara.firebaseapp.com",
+    projectId: "revistaraara",
+    storageBucket: "revistaraara.appspot.com",
+    messagingSenderId: "563909133654",
+    appId: "1:563909133654:web:1935150f4e1142725282f7",
+    measurementId: "G-K1NTK125VS",
+    databaseURL: "https://revistaraara-default-rtdb.europe-west1.firebasedatabase.app"
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  const db = getDatabase();
+  const database = getDatabase();
+
+  //Está logeado?
+  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+
+  //Crear usuario
+
+  (() => {
+        'use strict';
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation');
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach((form) => {
+            form.addEventListener('submit', (event) => {
+        
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+        
+                }else{
+
+                    event.preventDefault();
+                    const registerPassword = document.getElementById("registerPassword");
+                    const registerPassword2 = document.getElementById("registerPassword2");
+
+                    if(registerPassword.value == registerPassword2.value){
+
+                      createUserWithEmailAndPassword(auth, registerEmail.value, registerEmail.value).then((userCredential) => {
+
+                        const user = userCredential.user;
+                        const dbRef = ref(getDatabase());
+                        function pad2(n) { return n < 10 ? '0' + n : n }
+
+                        var date = new Date();
+    
+                        const today = (pad2(date.getDate())+ "/"+ pad2(date.getMonth() + 1)+"/"+ date.getFullYear().toString()+ " "+ pad2( date.getHours() )+":"+ pad2( date.getMinutes() )+":"+ pad2( date.getSeconds()));
+
+                        function writeUserData(userId, name, email, imageUrl, titles, friends, rate, verified, state, accountCreatedAt, tag, talkersAdmin, talkersLevel, araraAdmin, araraLevel) {
+                          set(ref(database, 'users/' + userId), {
+                            userInfo : {
+                              username: name,
+                              useremail: email,
+                              userProfilePicture: imageUrl,
+                              userTitles: titles,
+                              userFriends: friends,
+                              userRate: rate,
+                              userVerified: verified,
+                              userState: state,
+                              userCreatedAt: accountCreatedAt,
+                              userTag: tag,
+                            },
+                            talkersAdmin : {
+                              admin: talkersAdmin,
+                              adminLevel: talkersLevel
+                            },
+                            araraAdmin: {
+                              admin: araraAdmin,
+                              adminLevel: araraLevel
+                            }
+                        });
+
+                          setTimeout(() => {
+                            callback()
+                          }, 1500);
+
+                        }
+
+                        function callback(){
+
+                          location.replace("./create-profile.html")
+
+                        }
+
+                        if(user){
+                            get(child(dbRef, `users/${user.uid}`)).then((snapshot) => {
+                              if (snapshot.exists()) {S
+                              } else {
+                                writeUserData(user.uid, 
+                                "Usuario", 
+                                user.email, 
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo32wVgb3_HjWqvDwHW2CUOfHNK8l2pFXEV9hWtfds&s", ["¡Nuevo!"],
+                                [0], 0.00, false, "¡Soy nuevo aquí!", today, "#0000", false, 0, false, 0
+                                )
+                              }
+
+                              location.replace("./create-profile.html")
+
+                            }).catch((error) => {
+                              console.error(error);
+                            });
+
+                        }
+
+                      }).catch((error) => {
+
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+
+                        if(errorCode == "auth/email-already-in-use"){
+
+                          const errorContainerCode = document.getElementById("errorContainerCode");
+                          const errorContainerMessage = document.getElementById("errorContainerMessage");
+                          const errorContainer = document.getElementById("errorContainer");
+                          const errorContainerClose = document.getElementById("errorContainerClose");
+
+                          errorContainerCode.innerHTML = "Error 01";
+                          errorContainerMessage.innerHTML = "Este correo ya está en uso";
+                          errorContainer.classList.remove("d-none")
+                          errorContainerClose.addEventListener("click", () => {
+
+                            errorContainer.classList.add("d-none")
+
+                          })
+
+                        }
+                          
+                      })
+
+                    }else{
+
+                      const errorContainerCode = document.getElementById("errorContainerCode");
+                      const errorContainerMessage = document.getElementById("errorContainerMessage");
+                      const errorContainer = document.getElementById("errorContainer");
+                      const errorContainerClose = document.getElementById("errorContainerClose");
+
+                      errorContainerCode.innerHTML = "Error 02";
+                      errorContainerMessage.innerHTML = "Las contraseñas no coinciden";
+                      errorContainer.classList.remove("d-none")
+                      errorContainerClose.addEventListener("click", () => {
+
+                        errorContainer.classList.add("d-none")
+
+                      })
+
+                    }
+                    
+                }
+        
+                form.classList.add('was-validated');
+
+        
+            
+            }, false);
+        });
+    })();
+
+</script>
 </html>

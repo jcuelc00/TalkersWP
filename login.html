@@ -12,7 +12,7 @@
   <title>Talkers</title>
 
   <!-- MDB icon -->
-  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="img/Logo.svg" type="image/x-icon" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <!-- Google Fonts Roboto -->
@@ -20,31 +20,9 @@
   <!-- MDB -->
   <link rel="stylesheet" href="css/mdb.min.css" />
 
-  <style>
-    .mask-custom {
-      backdrop-filter: blur(2px);
-
-    }
-
-    @media screen and (max-width: 580px) {
-      #navbar {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-      }
-
-      #navbar-left {
-        display: flex !important;
-        align-items: center !important;
-        width: 100% !important;
-        justify-content: center;
-        margin-bottom: 10px;
-      }
-    }
-  </style>
-
 </head>
 <body>
+
 
    <div class="container">
     <div class="row d-flex align-items-center" style="height: 100vh;">
@@ -55,28 +33,77 @@
             <div class="p-5 w-50 shadow-2-soft rounded-2 mx-auto" style="min-width: 300px;">
                 <p class="fs-3 text-center">Inicia sesión en <span class="fw-bold text-primary">Talkers</span></p>
                 <p class="text-center">Para poder disfrutar <br> de todas las características</p>
-                <div class="form-outline my-4">
-                    <i class="fas fa-at trailing"></i>
-                    <input type="text" id="form12" class="form-control" />
-                    <label class="form-label " for="form12">Correo electrónico</label>
-                </div>
-                <div class="form-outline my-4">
-                    <i class="fas fa-lock trailing"></i>
-                    <input type="password" id="form12" class="form-control" />
-                    <label class="form-label " for="form12">Contraseña</label>
-                </div>
-                <div class="text-center">
-                    <a href="#" class="text-center">¿No tienes una cuenta?</a> <br>
-                    <a href="#" class="text-center">¿Has olvidado tu contraseña?</a>
-                    <button class="btn bg-primary bg-opacity-75 mt-3 text-white">Iniciar sesión</button>
-                </div>
+                <form class="needs-validation" novalidate>
+                  <div class="form-outline my-5">
+                    <input type="email" class="form-control" id="loginEmail" required />
+                    <label for="loginEmail" class="form-label">Correo electónico</label>
+                    <div class="invalid-feedback">Introdúce un correo válido</div>
+                  </div>
+                  <div class="form-outline my-5">
+                    <input type="password" class="form-control" id="loginPassword" required />
+                    <label for="loginPassword" class="form-label">Contraseña</label>
+                    <div class="invalid-feedback">La constraseña no coincide</div>
+                  </div>
+                  <div class="text-center">
+                      <a href="#" class="text-center">¿No tienes una cuenta?</a> <br>
+                      <a href="#" class="text-center">¿Has olvidado tu contraseña?</a>
+                      <button class="btn bg-primary bg-opacity-75 mt-3 text-white" id="loginBtn" type="submit">Iniciar sesión</button>
+                  </div>
+                </form>
             </div>
         </div>
     </div>
    </div>
 
   <script type="text/javascript" src="js/mdb.min.js"></script>
-  <script type="text/javascript"></script>
+  <script>
+    const forms = document.querySelectorAll('.needs-validation');
+    const loginEmail = document.getElementById("loginEmail");
+    const loginPassword = document.getElementById("loginPassword");
+    const loginBtn = document.getElementById("loginBtn");
+
+  </script>
+  <script src="script/login.js"></script>
 
 </body>
+<script type="module">
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-analytics.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signInWithCustomToken, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+  import { getDatabase, ref, set, get, child, onValue, update, query, orderByChild, startAt } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCvu5ybKhzq0WGnZnDjq7XHLrIHO1FcNrQ",
+    authDomain: "revistaraara.firebaseapp.com",
+    projectId: "revistaraara",
+    storageBucket: "revistaraara.appspot.com",
+    messagingSenderId: "563909133654",
+    appId: "1:563909133654:web:1935150f4e1142725282f7",
+    measurementId: "G-K1NTK125VS",
+    databaseURL: "https://revistaraara-default-rtdb.europe-west1.firebasedatabase.app"
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  const db = getDatabase();
+
+  //Está logeado?
+  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+
+</script>
 </html>
