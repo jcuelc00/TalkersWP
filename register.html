@@ -32,11 +32,12 @@
   </head>
 <body>
 
-  <div class="p-2 bg-danger position-absolute rounded-2 top-0 mt-5 start-50 translate-middle-x text-white text-center shadow-2-strong d-none"  id="errorContainer" style="min-width: 300px;">
+  <div class="p-2 position-absolute rounded-2 top-0 mt-5 start-50 translate-middle-x text-white text-center shadow-2-strong d-none"  id="errorContainer" style="min-width: 300px;">
     <div class="position-relative">
-      <p class="my-2" id="errorContainerCode">ErrorCode</p>
-      <p class="my-2" id="errorContainerMessage">errorMessage</p>
-      <span class="position-absolute translate-middle top-0 start-100 pe-3" style="cursor: pointer;" id="errorContainerClose">&times;</span>
+      <p class="fs-4 my-2 badge badge-danger" id="errorContainerCode">ErrorCode</p>
+      <br>
+      <p class="my-2 badge badge-danger" id="errorContainerMessage">errorMessage</p>
+      <span class="position-absolute translate-middle top-0 start-100 pt-3 pe-3 text-dark" style="cursor: pointer;" id="errorContainerClose">&times;</span>
     </div>
   </div>
 
@@ -143,7 +144,7 @@
 
                     if(registerPassword.value == registerPassword2.value){
 
-                      createUserWithEmailAndPassword(auth, registerEmail.value, registerEmail.value).then((userCredential) => {
+                      createUserWithEmailAndPassword(auth, registerEmail.value, registerPassword.value).then((userCredential) => {
 
                         const user = userCredential.user;
                         const dbRef = ref(getDatabase());

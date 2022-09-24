@@ -32,6 +32,14 @@
   </head>
 <body>
 
+  <div class="p-2 position-absolute rounded-2 top-0 mt-5 start-50 translate-middle-x text-white text-center shadow-2-strong d-none"  id="errorContainer" style="min-width: 300px;">
+    <div class="position-relative">
+      <p class="fs-4 my-2 badge badge-danger" id="errorContainerCode">ErrorCode</p>
+      <br>
+      <p class="my-2 badge badge-danger" id="errorContainerMessage">errorMessage</p>
+      <span class="position-absolute translate-middle top-0 start-100 pt-3 pe-3 text-dark" style="cursor: pointer;" id="errorContainerClose">&times;</span>
+    </div>
+  </div>
 
    <div class="container">
     <div class="row d-flex align-items-center" style="height: 100vh;">
@@ -72,14 +80,13 @@
     const loginBtn = document.getElementById("loginBtn");
 
   </script>
-  <script src="script/login.js"></script>
 
 </body>
 <script type="module">
   
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-analytics.js";
-  import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signInWithCustomToken, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
   import { getDatabase, ref, set, get, child, onValue, update, query, orderByChild, startAt } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
 
   const firebaseConfig = {
@@ -107,7 +114,83 @@
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
-      // ...
+      
+      
+  (() => {
+        'use strict';
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation');
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach((form) => {
+            form.addEventListener('submit', (event) => {
+        
+                if (!form.checkValidity()) {
+
+                  event.preventDefault();
+                  event.stopPropagation();
+        
+                }else{
+
+                  event.preventDefault();
+                  
+                  const loginEmail = document.getElementById("loginEmail");
+                  const loginPassword = document.getElementById("loginPassword");
+                  console.log(loginPassword.value)
+
+                  signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
+                  .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+
+                    setTimeout(() => {
+                      location.replace("./index.html")
+                    }, 200);
+
+                    // ...
+                  })
+                  .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    const errorContainerCode = document.getElementById("errorContainerCode");
+                    const errorContainerMessage = document.getElementById("errorContainerMessage");
+                    const errorContainer = document.getElementById("errorContainer");
+                    const errorContainerClose = document.getElementById("errorContainerClose")
+
+                      if(errorCode == "auth/user-not-found"){
+
+                        errorContainerCode.innerHTML = "Error 03";
+                        errorContainerMessage.innerHTML = "Usuario no encontrado";
+                        errorContainer.classList.remove("d-none")
+                        errorContainerClose.addEventListener("click", () => {
+
+                          errorContainer.classList.add("d-none")
+
+                        })
+
+                      }else if(errorCode == "auth/wrong-password"){
+
+                        errorContainerCode.innerHTML = "Error 04";
+                        errorContainerMessage.innerHTML = "Contraseña incorrecta";
+                        errorContainer.classList.remove("d-none")
+                        errorContainerClose.addEventListener("click", () => {
+
+                          errorContainer.classList.add("d-none")
+
+                        })
+
+                      }
+                  });
+                    
+                }
+        
+              form.classList.add('was-validated');
+            
+            }, false);
+        });
+    })();
+
     } else {
       // User is signed out
       // ...
