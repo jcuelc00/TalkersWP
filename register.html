@@ -74,10 +74,10 @@
             </div>
         </div>
     </div>
-   </div>
+  </div>
 
   <script type="text/javascript" src="js/mdb.min.js"></script>
-  <script type="text/javascript"></script>
+  <script type="text/javascript" src="js/firebase_config.js"></script>
 
 </body>
 <script type="module">
@@ -86,17 +86,6 @@
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-analytics.js";
   import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signInWithCustomToken, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
   import { getDatabase, ref, set, get, child, onValue, update, query, orderByChild, startAt } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCvu5ybKhzq0WGnZnDjq7XHLrIHO1FcNrQ",
-    authDomain: "revistaraara.firebaseapp.com",
-    projectId: "revistaraara",
-    storageBucket: "revistaraara.appspot.com",
-    messagingSenderId: "563909133654",
-    appId: "1:563909133654:web:1935150f4e1142725282f7",
-    measurementId: "G-K1NTK125VS",
-    databaseURL: "https://revistaraara-default-rtdb.europe-west1.firebasedatabase.app"
-  };
   
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
