@@ -1,1 +1,1 @@
-console.log(process.env.measurementId)
+console.log(env.measurementId)
