@@ -19,7 +19,19 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    env:
+      privateKeyID: "bb9d883cffebd81189f1c5db1ed8f808af80f2cb"
+      privateKey: "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCvWxkopxq2BjRY\nwzcnvti7X8SBi3WuvD3lZDpx78KbAzRtzFrIsTuVY4HnIqh26xHRM0tNIGVq7aBL\ng0oQYh6SQIMVs42Q4ImKxedowLhz79yf2x9n65TeyBWjZGhAutLapS0keecPKO1X\nWTy5E+rhjHOLmm5GfFbT6b+W4tEL89onLSwpPQVfvX2PrQcb5RIqP5t2lgwX1E1z\nu/e0Nm7zJvZdVVfuYQGOp9YnbIlM1Pf+vAY88bf3BjDp1OYt5MGHU+IZnfb9KYQV\nfWortbB8H+XfaYB4+MPxbHiniAoCiH52LoGlXTxGRDctQGUcITWc/S1Li5VL7Qha\n2oT5U+4pAgMBAAECggEAET7+5vIkXOGYVWCBtK1+6FK/Y1RBczl9RunIG7uOYqt6\nhQ/zn8haiVM7i+1rLyLoYjBOyBuXDeCoArU7XAgiZJTmr4Q0uJp0vIrBOxq1KWXe\nR3SIDrLrNcvs4OB3pmIZabqUCYHZuTJ3wT78C2HLmHo1RPYfwVvqODZFiwPstmWP\n3Y545SB8NDaiIAcw461tM6oTLINrAZ13vgRKGV6tpNjsog8u+cP278v0INcIJ2Yq\nvrqy7eDeop4UnqhK2MEf/FuxPi553GVa5QMhgKqVws9/IOcuvHWR1jeqiUFxikFC\nm5emfZRvek2caNALDzEYvi+vcxzzpM3yigQRL7xMwQKBgQDqDVJn9ZAsfExG+l1P\n9W0ZwKaWoGNpFuODrCCtUS//jjc/v+C/kpyTClXit0cZYrwgJyoKnDPekPQD+YPM\nuD5tyaTGItkHBVFbFewCPQMQiNYOwe5HTek9x6Rc2SeaRf0uinZeH+1F74JQjO3l\nZiafvOwqQvIN146QErxnfI1z8QKBgQC/zLWh4cMnx5Y3c1wwptfkq1HFmkzKPk4r\nhoIVy1oy9n+wxve4teOVCFiMCpoMYoIW0YkPXU8drIBsGaV/z197LmVFJ/iCUBaf\n280e8IBdcoN+K+gGNHEUJHCFax+Gr3cU3dPl6PkBc0qAURFOtbbowTVtcfRkkoLW\nafkCyP51uQKBgByETQMPn2ZcKqsHPDFO1OErYOC/X/1g5Y2Yfk6/sppviHnC9i5B\nPcSIoNhDvmzwY72DKBMs3wECJkkJsK5T0H9t7x6ZBlpdooD3lc7cAjCUi4g2xsJ3\nUrDNT1BkwPeCCYwPIMbtGurHeNg5o46suI4D5b5sc7OODPeu4Le3LEDxAoGATla+\nmTAtFcJfiKaFsRl0dOHEtIEhfDmWlBCMcXptjQNBhGLAK6GfIvAVup1Z7lUN7WQI\nJ05lUilzCrQu9NUumpGIq4Z36kHr+787OLfitkhfjNlCG8avqRp5GwV2Cv0AFnXE\nZtORYRZGB8MU3qE55DeGKv2wZKOy7QC7xHdz94ECgYAGxaXvymuT7cLuR37rh/FP\nFouZAQfLqy83MAExM+Uhzooti/nMbfBfzvXfPkZTsbCyhabq9YsMZCPo87/Fe+ud\nbEhVcG/McqDH5hrXzoe/OIkc/Cjsh2fPSCGHnbj8UbbqBjmTDvpa1xnQYsfQrJ9e\n4Ixg/fVfPC7xhscizK2G4w==\n-----END PRIVATE KEY-----\n"
+      clientEmail: "firebase-adminsdk-ozp70@revistaraara.iam.gserviceaccount.com"
+      client_id: "102731677577328804697"
+      client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ozp70%40revistaraara.iam.gserviceaccount.com"
+      apiKey: "AIzaSyCvu5ybKhzq0WGnZnDjq7XHLrIHO1FcNrQ"
+      messagingSenderId: "563909133654"
+      appId: "1:563909133654:web:1935150f4e1142725282f7"
+      measurementId: "G-K1NTK125VS"
+      databaseURL: "https://revistaraara-default-rtdb.europe-west1.firebasedatabase.app"
+      storageBucket: 'gs://revistaraara.appspot.com'
+      
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
